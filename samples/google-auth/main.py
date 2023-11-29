@@ -4,15 +4,13 @@ import os
 import uuid
 
 from buildflow import Flow
-from buildflow.exceptions import HTTPException
-from buildflow.dependencies import dependency, Scope
+from buildflow.dependencies import Scope, dependency
 from buildflow.dependencies.auth import AuthenticatedGoogleUserDepBuilder
+from buildflow.exceptions import HTTPException
 from buildflow.middleware import SessionMiddleware
 from buildflow.requests import Request
 from buildflow.responses import RedirectResponse
-
 from google_auth_oauthlib import flow as google_auth_flow
-
 
 app = Flow()
 
@@ -20,7 +18,7 @@ service = app.service(service_id="auth-sample")
 service.add_middleware(SessionMiddleware, secret_key=str(uuid.uuid4()))
 
 # Set up a google user if the user is authenticated
-# We use `session_id_token` to indicate we can use "token_id" from the session
+# We use `session_id_token` to indicate we can use "id_token" from the session
 # to fetch the user id token.
 MaybeAuthenticatedGoogleUser = AuthenticatedGoogleUserDepBuilder(
     session_id_token="id_token", raise_on_unauthenticated=False
