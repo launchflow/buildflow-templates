@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<body>
+    <div class="h-screen">
+        <div class="flex h-full flex-col md:flex-row">
+            <div class="basis-1/2 bg-white h-full">
+                <nav class="top-0 flex flex-grow justify-between md:justify-end">
+                    <a class="m-1 md:hidden" href="https://launchflow.com">
+                        <img src="https://www.launchflow.com/images/logo.svg" alt="logo" style="height:26px">
+                    </a>
+                    <div>
+                        <a class="m-1 hover:border-[#681dd6] border-b-2 border-white"
+                            href="https://docs.buildflow.dev">BuildFlow
+                            Docs</a>
+                        <a class="m-1 hover:border-[#681dd6] border-b-2 border-white"
+                            href="https://docs.launchflow.com">LaunchFlow
+                            Docs</a>
+                        <a class="m-1 border-[#681dd6] hover:border-b-2"
+                            href="https://discordapp.com/invite/wz7fjHyrCA">Discord</a>
+                    </div>
+                </nav>
+                <div class="flex flex-col items-center justify-center m-10">
+                    <form class="m-5" id="uploadForm" enctype=" multipart/form-data">
+                        <input class="form-control" type="file" id="image_file" name="image_file">
+                        </button>
+                        <button onclick="uploadFile(event)" type="submit"
+                            class="bg-[#681dd6] text-white w-full mt-4 rounded">
+                            Upload
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="h-full basis-1/2 bg-slate-200 md:order-first">
+                <nav class="top-0 flex flex-grow justify-between invisible md:visible">
+                    <a class="m-1 flex justify-start" href="https://launchflow.com">
+                        <img src="https://www.launchflow.com/images/logo.svg" alt="logo" style="height:26px">
+                    </a>
+                </nav>
+                <div class="flex flex-col items-center justify-center m-10 border-2 rounded-lg">
+                    <button class="bg-[#681dd6] text-white py-2 px-4 rounded" type=" button" onclick="loadResults()">
+                        Load Results</button>
+                </div>
+                <hr>
+                <div id="results" class="bg-slate-200"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    async function uploadFile(event) {
+        event.preventDefault();
+        const form = new FormData(document.getElementById('uploadForm'));
+        try {
+            const response = await fetch('/image-upload', {
+                method: 'POST',
+                body: form,
+            });
+            const result = await response.json();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    async function loadResults() {
+        try {
+            const response = await fetch('/image-upload-results');
+            const result = await response.text();
+            document.getElementById('results').innerHTML = result
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,1 @@
+Container folder that we will listen to image "uploads" from.

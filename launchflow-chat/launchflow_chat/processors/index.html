@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h2>LaunchFlow Chat</h2>
+    <br>
+    <form id="new-chat">
+        <button type="submit">New Chat</button>
+    </form>
+    <br>
+    <textarea id="chat" rows="20" cols="50"></textarea>
+
+    <form id="chat-form">
+
+        <textarea id="chat-input" name="prompt" placeholder="Enter text here" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Previous Chats</h2>
+    <div id="chat-sessions"></div>
+</body>
+
+<script>
+    let chatSession = null;
+    function loadSession(sessionId) {
+        chatSession = sessionId;
+        fetch('/get_session/' + sessionId, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(session => {
+                document.querySelector('#chat').innerHTML = session.chat + "\n\n";
+                textarea = document.querySelector('#chat')
+                textarea.scrollTop = textarea.scrollHeight;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    function loadAllSessions() {
+        fetch('/list_sessions', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => response.json())
+            .then(sessions => {
+                var chatSession = document.getElementById('chat-sessions');
+                chatSession.innerHTML = "";
+                sessions.forEach(session => {
+                    var newLink = document.createElement('a');
+                    newLink.textContent = session.session_preview;
+                    newLink.href = "#";
+                    newLink.onclick = function () {
+                        loadSession(session.session_id);
+                        return false; // Prevents the default behavior of the link
+                    };
+                    chatSession.appendChild(newLink);
+                    chatSession.appendChild(document.createElement('br')); // Adds a line break between links
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    window.onload = function () {
+        loadAllSessions();
+    };
+    document.querySelector('#new-chat').addEventListener('submit', function (event) {
+        event.preventDefault();
+        chatSession = null;
+        document.querySelector('#chat').innerHTML = "";
+        document.querySelector('#chat-input').value = "";
+    });
+    document.querySelector('#chat-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        sendChatMaybeCreate();
+    });
+
+    function sendChat() {
+        let promptInput = document.querySelector('#chat-input').value;
+        textarea = document.querySelector('#chat')
+        document.querySelector('#chat-input').value = "";
+        document.querySelector('#chat').innerHTML += "User: " + promptInput + "\n\n";
+        textarea.scrollTop = textarea.scrollHeight;
+
+        fetch('/chat/send_chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                prompt: promptInput,
+                chat_session: chatSession
+            })
+        })
+            .then(response => {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+
+                return reader.read().then(function processStream({ done, value }) {
+                    textarea = document.querySelector('#chat')
+                    textarea.scrollTop = textarea.scrollHeight;
+                    if (done) {
+                        textarea.innerHTML += "\n\n";
+                        return;
+                    }
+                    decoded = decoder.decode(value)
+                    textarea.innerHTML += decoded;
+                    return reader.read().then(processStream);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function sendChatMaybeCreate() {
+
+        if (chatSession === null) {
+            fetch('/create_session', {
+                method: 'POST',
+            })
+                .then(response => response.body.getReader().read())
+                .then(data => {
+                    const decoder = new TextDecoder('utf-8');
+                    console.log(data)
+                    chatSession = decoder.decode(data.value).replace(/"/g, '');
+                    console.log(chatSession)
+                    loadAllSessions();
+                    sendChat();
+                })
+                .catch(error => console.error('Error:', error));
+            return;
+        } else {
+            sendChat();
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<body>
+    <div class="h-screen">
+        <div class="flex h-full flex-col md:flex-row overflow-hidden">
+            <div class="basis-1/2 bg-white h-full">
+                <nav class="top-0 flex flex-grow justify-between md:justify-end">
+                    <a class="m-1 md:hidden" href="https://launchflow.com">
+                        <img src="https://www.launchflow.com/images/logo.svg" alt="logo" style="height:26px">
+                    </a>
+                    <div>
+                        <a class="m-1 hover:border-[#681dd6] border-b-2 border-white"
+                            href="https://docs.buildflow.dev">BuildFlow
+                            Docs</a>
+                        <a class="m-1 hover:border-[#681dd6] border-b-2 border-white"
+                            href="https://docs.launchflow.com">LaunchFlow
+                            Docs</a>
+                        <a class="m-1 border-[#681dd6] hover:border-b-2"
+                            href="https://discordapp.com/invite/wz7fjHyrCA">Discord</a>
+                    </div>
+                </nav>
+                <div class="flex flex-row justify-center mt-4 w-full h-full">
+                    <form class="m-5 w-full h-full" id="journalCreate">
+                        <input class="border-2 rounded w-full" type="text" id="journal-title" name="journal-entry"
+                            placeholder="Journal Title">
+                        <textarea class="border-2 rounded w-full h-96" id="journal-content" name="journal-entry"
+                            placeholder="Enter your journal content here"></textarea>
+                        <button onclick="saveJournal(event)" type="submit"
+                            class="bg-[#681dd6] text-white w-full rounded">
+                            Save
+                        </button>
+                        <button onclick="deleteJournal(event)" id="delete" type="submit"
+                            class="hidden bg-[#681dd6] text-white w-full mt-2 rounded">
+                            Delete
+                        </button>
+                        <button onclick="newJournal(event)" id="delete" type="submit"
+                            class="bg-[#681dd6] text-white w-full mt-2 rounded">
+                            New Journal
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="basis-1/2 bg-slate-200 md:order-first overflow-hidden">
+                <div class="overflow-x-scroll h-full" id="results">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let selectedJournel = null;
+    async function saveJournal(event) {
+        event.preventDefault();
+        const journalTitle = document.getElementById('journal-title').value;
+        const journalContent = document.getElementById('journal-content').value;
+        try {
+            const request = JSON.stringify({
+                title: journalTitle,
+                content: journalContent
+            });
+            let response = null
+            if (selectedJournel === null) {
+                response = await fetch('/journals/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: journalTitle,
+                        content: journalContent
+                    }),
+                });
+            } else {
+                response = await fetch('/journals/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: selectedJournel.id,
+                        title: journalTitle,
+                        content: journalContent
+                    }),
+                });
+            }
+            document.getElementById('delete').classList.remove('hidden');
+            selectedJournel = await response.json();
+            await loadJournals();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    async function newJournal(event) {
+        event.preventDefault();
+        const journalTitle = document.getElementById('journal-title');
+        const journalContent = document.getElementById('journal-content');
+        journalTitle.value = "";
+        journalContent.value = "";
+        selectedJournel = null;
+        document.getElementById('delete').classList.add('hidden');
+        for (let i = 0; i < selectedJournalList.parentNode.children.length; i++) {
+            selectedJournalList.parentNode.children[i].classList.remove('bg-gray-300');
+            selectedJournalList.parentNode.children[i].classList.add('bg-white');
+        }
+    }
+    async function loadJournal(journal) {
+        const journalTitle = document.getElementById('journal-title');
+        const journalContent = document.getElementById('journal-content');
+        journalTitle.value = journal.title;
+        journalContent.value = journal.content;
+        selectedJournel = journal;
+        document.getElementById('delete').classList.remove('hidden');
+        selectedJournalList = document.getElementById(selectedJournel.id);
+        selectedJournalList.classList.add('bg-gray-300');
+        selectedJournalList.classList.remove('bg-white');
+        for (let i = 0; i < selectedJournalList.parentNode.children.length; i++) {
+            if (selectedJournalList.parentNode.children[i].id !== selectedJournel.id) {
+                selectedJournalList.parentNode.children[i].classList.remove('bg-gray-300');
+                selectedJournalList.parentNode.children[i].classList.add('bg-white');
+            }
+        }
+    }
+    async function loadJournals() {
+        try {
+            const response = await fetch('/journals/list');
+            const result = await response.json();
+            console.log(result)
+            resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = "";
+            result.journals.map((journal) => {
+                const journalDiv = document.createElement('div');
+                journalDiv.className = 'flex flex-col m-5 p-5 rounded cursor-pointer hover:bg-gray-300';
+                if (selectedJournel !== null && selectedJournel.id === journal.id) {
+                    journalDiv.classList.add('bg-gray-300');
+                } else {
+                    journalDiv.classList.add('bg-white');
+                }
+                journalDiv.id = journal.id;
+                const journalTitle = document.createElement('div');
+                journalTitle.className = 'flex flex-row justify-between';
+                const journalTitleHeader = document.createElement('h2');
+                journalTitleHeader.className = 'text-xl';
+                journalTitleHeader.innerText = journal.title;
+                journalTitle.appendChild(journalTitleHeader)
+                journalCreateTime = document.createElement('p');
+                journalCreateTime.className = 'italic text-sm text-gray-500';
+                const date = new Date(journal.created_at);
+                journalCreateTime.innerText = date.toLocaleString();
+                journalContent = document.createElement('p');
+                journalContent.className = 'text-sm text-gray-500';
+                if (journal.content.length < 20) {
+                    journalContent.innerText = journal.content;
+                } else {
+                    journalContent.innerText = journal.content.substring(0, 20) + '...';
+                }
+                journalDiv.appendChild(journalTitle);
+                journalDiv.appendChild(journalCreateTime);
+                journalDiv.appendChild(journalContent)
+                journalDiv.addEventListener("click", function () {
+                    loadJournal(journal);
+                })
+                resultsDiv.appendChild(journalDiv);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    async function deleteJournal(event) {
+        event.preventDefault();
+        try {
+            response = await fetch('/journals/delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: selectedJournel.id,
+                }),
+            });
+            await loadJournals();
+            newJournal(event);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    window.addEventListener('load', loadJournals);
+</script>
+
+</html>

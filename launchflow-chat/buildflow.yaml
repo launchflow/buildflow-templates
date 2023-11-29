@@ -1,0 +1,10 @@
+project: launchflow-chat
+pulumi_config:
+  pulumi_home: .buildflow/_pulumi
+  stacks:
+    - name: local
+      backend_url: file://.buildflow/_pulumi/local
+    - name: dev
+      backend_url: gs://launchflow-chat-dev-stack
+  passphrase: buildflow-is-awesome
+entry_point: main:app
