@@ -1,4 +1,4 @@
-app: launchflow-endpoint-template
+app: buildflow-service
 pulumi_config:
     default_stack: local
     stacks:

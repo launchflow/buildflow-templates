@@ -1,13 +1,13 @@
 """This file contains any primitive definitions that you may need in your flow.
 
 For example if you needed a remote storagebucket:
-- Google Cloud Storage: https://docs.buildflow.dev/primitives/gcp/gcs
+- Google Cloud Storage: https://docs.launchflow.com/buildflow/primitives/gcp/gcs
 
     from buildflow.io.gcp import GCSBucket
 
     bucket = GCSBucket(project_id="project", bucket_name="bucket")
 
-- Amazon S3: https://docs.buildflow.dev/primitives/aws/s3
+- Amazon S3: https://docs.launchflow.com/buildflow/primitives/aws/s3
 
 
     from buildflow.io.aws import S3Bucket

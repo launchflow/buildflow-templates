@@ -2,7 +2,7 @@
 
 <!-- Walkthroughs -->
 
-- Image Classification (GCP) - NOT DONE
+- Image Classification (GCP) - NEEDS UPLOAD
 - Image Classification (AWS) - NOT DONE
 - Image Classification (Local) - NOT DONE
 - Llama Chat Bot (GCP / AWS) - NOT DONE

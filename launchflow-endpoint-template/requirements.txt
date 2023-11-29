@@ -1,3 +1,0 @@
-buildflow @ git+https://github.com/launchflow/buildflow.git
-python-dotenv
-ray==2.7.0
