@@ -1,8 +1,9 @@
-project: google-auth-sample
+app: google-auth-sample
 pulumi_config:
+    pulumi_home: ./.buildflow/_pulumi
+    default_stack: local
     stacks:
     -   name: local
         backend_url: file://./.buildflow/_pulumi/local
-    pulumi_home: ./.buildflow/_pulumi
 entry_point: main:app
 build_ignores: []
