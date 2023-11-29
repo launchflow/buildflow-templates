@@ -1,4 +1,4 @@
-project: google-auth-sample
+project: managed-resources
 pulumi_config:
     stacks:
     -   name: local

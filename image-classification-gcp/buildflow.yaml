@@ -1,6 +1,7 @@
-project: buildflow-gcp-image-classification-walkthrough
+app: image-classification-gcp
 pulumi_config:
   pulumi_home: .buildflow/_pulumi
+  default_stack: local
   stacks:
     - name: local
       backend_url: file://.buildflow/_pulumi/local

@@ -1,4 +1,4 @@
-project: google-auth-sample
+project: model-loading
 pulumi_config:
     stacks:
     -   name: local

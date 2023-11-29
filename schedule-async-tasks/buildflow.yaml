@@ -1,4 +1,4 @@
-project: google-auth-sample
+project: schedule-async-tasks
 pulumi_config:
     stacks:
     -   name: local

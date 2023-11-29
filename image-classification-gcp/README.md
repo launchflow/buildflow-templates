@@ -1,6 +1,6 @@
-# Walkthrough of using BuildFlow with GCS File Events 
+# Classify images as they're uploaded to a GCS bucket
 
-This walk through shows how you can use BuildFlow to upload images to a GCS bucket. once uploaded run them through an image classification model and store the results in BigQuery.
+This walkthrough shows how you can use BuildFlow to upload images to a GCS bucket, run them through an image classification model, and store the results in BigQuery.
 
 ## Running locally
 

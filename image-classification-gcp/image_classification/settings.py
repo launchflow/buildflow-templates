@@ -1,12 +1,10 @@
-from enum import Enum
 import os
+from enum import Enum
 
 import dotenv
 
 
 class Environment(Enum):
-    DEV = "dev"
-    PROD = "prod"
     LOCAL = "local"
 
 

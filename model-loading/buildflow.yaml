@@ -1,4 +1,4 @@
-project: google-auth-sample
+project: serve-from-postgres
 pulumi_config:
     stacks:
     -   name: local
