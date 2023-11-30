@@ -1,8 +1,0 @@
-project: launchflow-consumer-template
-pulumi_config:
-    stacks:
-    -   name: local
-        backend_url: file://./.buildflow/_pulumi/local
-    pulumi_home: ./.buildflow/_pulumi
-entry_point: main:app
-build_ignores: []

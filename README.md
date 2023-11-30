@@ -2,37 +2,37 @@
 
 <!-- Walkthroughs -->
 
-- Image Classification (GCP) - NEEDS UPLOAD
-- Image Classification (AWS) - NOT DONE
-- Image Classification (Local) - NOT DONE
-- Llama Chat Bot (GCP / AWS) - NOT DONE
-- Journal Entry Web App (GCP) - NOT DONE
-- Collect Wearable Device Data (GCP) - NOT DONE
+- Realtime Image Classification (GCP)
+- Realtime Image Classification (AWS)
+- Realtime Image Classification (Local)
+- Llama Chat Bot (GCP / AWS)
+- Journal Entry SaaS App (GCP)
+- Collect Wearable Device Data (GCP)
 
 <!-- Starter Templates -->
 
-- BuildFlow Collector - NOT DONE
-- BuildFlow Consumer - NOT DONE
-- BuildFlow Service - NOT DONE
-- SaaS Starter (GCP) - NOT DONE
+- BuildFlow Collector
+- BuildFlow Consumer
+- BuildFlow Service
+- SaaS Starter (GCP)
 
 <!-- Samples -->
 
-- Discord Bot - NOT DONE
-- Slack Bot - NOT DONE
-- Google Auth - NOT DONE
-- Serve from Postgres (GCP) - NOT DONE
-- Serve from Storage Bucket (GCP) - NOT DONE
-- Serve from Storage Bucket (AWS) - NOT DONE
-- Stripe Webhooks - NOT DONE
-- Dead Letter Queue (GCP) - NOT DONE
-- Dead Letter Queue (AWS) - NOT DONE
-- Schedule Background Tasks (GCP) - NOT DONE
-- Schedule Background Tasks (AWS) - NOT DONE
-- Long Running Workflows (GCP) - NOT DONE
-- Long Running Workflows (AWS) - NOT DONE
-- Stream data over WebSockets - NOT DONE
-- Load Model from Storage Bucket (GCP) - NOT DONE
-- Load Model from Storage Bucket (AWS) - NOT DONE
-- Sync Data to Data Warehouse (GCP) - NOT DONE
-- Sync Data to Data Warehouse (Snowflake) - NOT DONE
+- Discord Bot
+- Slack Bot
+- Google Auth
+- Serve from Postgres (GCP)
+- Serve from Storage Bucket (GCP)
+- Serve from Storage Bucket (AWS)
+- Stripe Webhooks
+- Dead Letter Queue (GCP)
+- Dead Letter Queue (AWS)
+- Schedule Background Tasks (GCP)
+- Schedule Background Tasks (AWS)
+- Long Running Workflows (GCP)
+- Long Running Workflows (AWS)
+- Stream data over WebSockets
+- Load Model from Storage Bucket (GCP)
+- Load Model from Storage Bucket (AWS)
+- Sync Data to Data Warehouse (GCP)
+- Sync Data to Data Warehouse (Snowflake)
