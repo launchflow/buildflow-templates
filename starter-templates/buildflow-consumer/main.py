@@ -3,11 +3,9 @@
 For more information see: https://docs.buildflow.dev/programming-guide/flows
 """
 from buildflow import Flow, FlowOptions
-
-from launchflow_consumer_template.processors.consumer import my_consumer
-from launchflow_consumer_template.primitives import sink, source
-from launchflow_consumer_template.settings import env
-
+from buildflow_consumer.primitives import sink, source
+from buildflow_consumer.processors.consumer import my_consumer
+from buildflow_consumer.settings import env
 
 app = Flow(flow_options=FlowOptions(stack=env.env.value))
 

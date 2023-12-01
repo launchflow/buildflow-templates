@@ -6,15 +6,17 @@ This is a simple example of [consumer](https://docs.buildflow.dev/programming-gu
 
 ## Running the Template
 
-To get started you will first need to define a [primitive](https://docs.buildflow.dev/programming-guide/primitives) source and a sink in [primitives.py](launchflow_consumer_template/primitives.py). Some examples could be:
+To get started you will first need to define a [primitive](https://docs.buildflow.dev/programming-guide/primitives) source and a sink in [primitives.py](buildflow_consumer/primitives.py). Some examples could be:
 
 **Sinks**
+
 - [GCP Pub/Sub Subscription](https://docs.buildflow.dev/primitives/gcp/pubsub#gcp-pub-sub-subscription)
 - [GCS File Change Stream](https://docs.buildflow.dev/primitives/gcp/gcs_file_change_stream)
 - [AWS SQS](https://docs.buildflow.dev/primitives/aws/sqs)
 - [S3 File Change Stream](https://docs.buildflow.dev/primitives/gcp/gcs_file_change_stream)
 
 **Sources**
+
 - [GCP BigQuery Table](https://docs.buildflow.dev/primitives/gcp/bigquery#bigquerytable)
 - [GCP Pub/Sub Topic](https://docs.buildflow.dev/primitives/gcp/pubsub#gcp-pub-sub-topic)
 - [AWS SQS](https://docs.buildflow.dev/primitives/aws/sqs)
@@ -35,6 +37,7 @@ To create the source and sink.
 ### Run the Consumer
 
 Now simply run:
+
 ```
 buildflow run
 ```
@@ -43,7 +46,7 @@ Once running you can send a JSON payload to your source and see the results in y
 
 ```json
 {
-    "int_field": 2
+  "int_field": 2
 }
 ```
 
@@ -51,7 +54,7 @@ And that should output the following:
 
 ```json
 {
-    "float_field": 1.0
+  "float_field": 1.0
 }
 ```
 
@@ -65,11 +68,11 @@ At the root level there are three important files:
 
 Below the root level we have:
 
-**launchflow_consumer_template**
+**buildflow_consumer**
 
 This is the directory where your project code lives. You can put any files you want in here and they will be available to your project. We create a couple directories and files for you:
 
-- **processors**: This is where you can put any custom processors you want to use in your project. In here you will see we have defined a *consumer.py* to define our [consumer](https://docs.buildflow.dev/programming-guide/consumers).
+- **processors**: This is where you can put any custom processors you want to use in your project. In here you will see we have defined a _consumer.py_ to define our [consumer](https://docs.buildflow.dev/programming-guide/consumers).
 - **primitives.py**: This is where you can define any custom [primitive](https://docs.buildflow.dev/primitives) resources that your project will need. Note it is empty right now since your initial project is so simple.
 - **dependencies.py**: This is where you can define any custom [dependencies](https://docs.buildflow.dev/programming-guide/dependencies) you might need.
 - **schemas.py**: This file contains our dataclass schemas for requests and responses from our endpoints.
@@ -77,8 +80,7 @@ This is the directory where your project code lives. You can put any files you w
 
 **.buildflow**
 
-This is a hidden directory that contains all the build artifacts for your project. You can general ignore this directory and it will be automatically generated for you. If you are using github you probably want to put this in your *.gitignore* file.
-
+This is a hidden directory that contains all the build artifacts for your project. You can general ignore this directory and it will be automatically generated for you. If you are using github you probably want to put this in your _.gitignore_ file.
 
 ## Customizing your project
 
@@ -88,4 +90,3 @@ You project is pretty simple now but you can customize it to do anything you wan
 - Use [depedencies](https://docs.buildflow.dev/programming-guide/dependencies) to attach dependencies to your processors. Such as [google auth](https://docs.buildflow.dev/dependencies/auth#authenticated-google-user), [SQLAlchemy Session](https://docs.buildflow.dev/dependencies/sqlalchemy), or push data to a [sink](https://docs.buildflow.dev/dependencies/sink)
 - Add additional processors for [serving APIs](https://docs.buildflow.dev/programming-guide/endpoints) or [data ingestion](https://docs.buildflow.dev/programming-guide/collectors)
 - Manage your entire stack with [BuildFlow's pulumi integration](https://docs.buildflow.dev/programming-guide/buildflow-yaml#pulumi-configure)
-

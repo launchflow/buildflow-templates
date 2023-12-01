@@ -1,21 +1,22 @@
 """Sample for how to load a model stored on a remote bucket."""
-from asyncio import Lock
 import logging
 import os
+from asyncio import Lock
 
 from buildflow import Flow
-from buildflow.dependencies import dependency, Scope
+from buildflow.dependencies import Scope, dependency
 from buildflow.dependencies.bucket import BucketDependencyBuilder
-from buildflow.io.aws import S3Bucket
+from buildflow.io.gcp import GCSBucket
 from buildflow.responses import StreamingResponse
-
 from llama_cpp import Llama
 
+# TODO(developer): Set this to your GCP project ID
+GCP_PROJECT_ID = "your-gcp-project-id"
 
 app = Flow()
 service = app.service(service_id="model-loading")
 
-bucket = S3Bucket(bucket_name="launchflow-llama-models")
+bucket = GCSBucket(project_id=GCP_PROJECT_ID, bucket_name="launchflow-llama-models")
 ModelBucketDep = BucketDependencyBuilder(bucket)
 
 

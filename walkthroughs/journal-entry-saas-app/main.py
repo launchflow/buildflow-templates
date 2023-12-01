@@ -2,11 +2,10 @@
 
 from buildflow import Flow, FlowOptions
 from buildflow.dependencies.sqlalchemy import engine
-
-from gcp_saas_example.processors.service import service
-from gcp_saas_example.settings import env
-from gcp_saas_example.storage import models
-from gcp_saas_example.primitives import cloud_sql_database, cloud_sql_instance
+from journal_entry_saas.primitives import cloud_sql_database, cloud_sql_instance
+from journal_entry_saas.processors.service import service
+from journal_entry_saas.settings import env
+from journal_entry_saas.storage import models
 
 if env.create_models:
     models.Base.metadata.create_all(

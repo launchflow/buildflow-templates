@@ -1,14 +1,12 @@
 """Sample for how to serve data from postgres."""
-import aiohttp.client_exceptions
 import os
 
+import aiohttp.client_exceptions
 from buildflow import Flow
-from buildflow.dependencies.sqlalchemy import SessionDep, engine
-from buildflow.io.gcp import CloudSQLInstance, CloudSQLDatabase
+from buildflow.dependencies.sqlalchemy import SessionDepBuilder, engine
+from buildflow.io.gcp import CloudSQLDatabase, CloudSQLInstance
 from buildflow.types.gcp import CloudSQLDatabaseVersion, CloudSQLInstanceSettings
-
-from serve_from_postgres import models
-from serve_from_postgres import api_schemas
+from serve_from_postgres import api_schemas, models
 
 app = Flow()
 service = app.service(service_id="serve-from-postgres")
@@ -28,7 +26,7 @@ cloud_sql_database = CloudSQLDatabase(
 
 app.manage(cloud_sql_instance, cloud_sql_database)
 
-DB = SessionDep(
+DB = SessionDepBuilder(
     db_primitive=cloud_sql_database,
     db_user=os.environ["DB_USER"],
     db_password=os.environ["DB_PASSWORD"],

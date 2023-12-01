@@ -1,17 +1,16 @@
 import logging
 import os
 
-from buildflow.dependencies import dependency, Scope
+from buildflow.dependencies import Scope, dependency
 from buildflow.dependencies.auth import AuthenticatedGoogleUserDepBuilder
 from buildflow.dependencies.bucket import BucketDependencyBuilder
-from buildflow.dependencies.sqlalchemy import SessionDep
+from buildflow.dependencies.sqlalchemy import SessionDepBuilder
 from llama_cpp import Llama
 
-from launchflow_chat.settings import env
-from launchflow_chat.storage.models import User
 from launchflow_chat.resources.database import cloud_sql_database
 from launchflow_chat.resources.storage import model_bucket
-
+from launchflow_chat.settings import env
+from launchflow_chat.storage.models import User
 
 ModelBucketDep = BucketDependencyBuilder(model_bucket)
 
@@ -27,7 +26,7 @@ class ModelDep:
         self.llama_model = Llama(env.model_path, n_ctx=512)
 
 
-DB = SessionDep(
+DB = SessionDepBuilder(
     db_primitive=cloud_sql_database,
     db_user=env.database_user,
     db_password=env.database_password,
