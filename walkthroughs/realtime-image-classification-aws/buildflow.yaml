@@ -1,8 +1,8 @@
-app: buildflow-aws-image-classification-walkthrough
+app: image-classification-aws
 pulumi_config:
     stacks:
-    -   name: local
-        backend_url: file://./.buildflow/_pulumi/local
+        - name: local
+          backend_url: file://./.buildflow/_pulumi/local
     pulumi_home: ./.buildflow/_pulumi
     default_stack: local
 entry_point: main:app
