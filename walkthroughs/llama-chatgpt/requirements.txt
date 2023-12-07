@@ -1,5 +1,0 @@
-buildflow @ git+https://github.com/boetro/caleb-bf-fork@postgres
-google-api-python-client==2.100.0
-llama-cpp-python==0.1.78
-python-dotenv
-pyOpenSSL>22.1.0

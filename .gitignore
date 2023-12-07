@@ -166,3 +166,4 @@ cython_debug/
 
 # Ruff
 .ruff_cache
+llama-2-7b-chat.Q8_0.gguf

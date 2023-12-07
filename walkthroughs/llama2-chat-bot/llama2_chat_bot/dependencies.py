@@ -17,8 +17,8 @@ from buildflow.dependencies import dependency, Scope
 from buildflow.dependencies.bucket import BucketDependencyBuilder
 from llama_cpp import Llama
 
-from launchflow_model_serving.primitives import model_bucket
-from launchflow_model_serving.settings import env
+from llama2_chat_bot.primitives import model_bucket
+from llama2_chat_bot.settings import env
 
 # This dependency loads a connection to the bucket containing our model.
 ModelBucketDep = BucketDependencyBuilder(model_bucket)

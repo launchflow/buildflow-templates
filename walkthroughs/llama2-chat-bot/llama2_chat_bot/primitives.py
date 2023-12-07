@@ -3,7 +3,7 @@
 from buildflow.io.aws import S3Bucket
 from buildflow.io.gcp import GCSBucket
 
-from launchflow_model_serving.settings import env
+from llama2_chat_bot.settings import env
 
 # This primitive defines our bucket that contains our model.
 if env.use_gcp:

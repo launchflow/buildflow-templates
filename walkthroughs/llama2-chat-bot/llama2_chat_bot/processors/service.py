@@ -9,9 +9,9 @@ from collections import deque
 from buildflow import Service
 from buildflow.responses import StreamingResponse, FileResponse
 
-from launchflow_model_serving.dependencies import ModelDep
-from launchflow_model_serving.schemas import ChatRequest
-from launchflow_model_serving.settings import env
+from llama2_chat_bot.dependencies import ModelDep
+from llama2_chat_bot.schemas import ChatRequest
+from llama2_chat_bot.settings import env
 
 # Create our service.
 # This service has 2 CPUs. This means that each replica will require 2 CPUs.

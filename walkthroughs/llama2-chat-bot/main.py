@@ -2,7 +2,7 @@
 
 from buildflow import Flow
 
-from launchflow_model_serving.processors.service import service
+from llama2_chat_bot.processors.service import service
 
 # Uncomment this line to manage the model bucket.
 # from launchflow_model_serving.primitives import model_bucket
