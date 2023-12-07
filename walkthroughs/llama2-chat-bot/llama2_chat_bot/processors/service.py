@@ -28,7 +28,7 @@ service = Service(
 # Attach the `index` endpoint to our service.
 @service.endpoint(route="/", method="GET")
 def index() -> FileResponse:
-    return FileResponse("launchflow_model_serving/processors/index.html")
+    return FileResponse("llama2_chat_bot/processors/index.html")
 
 
 # Attach the `index` endpoint to our service.
