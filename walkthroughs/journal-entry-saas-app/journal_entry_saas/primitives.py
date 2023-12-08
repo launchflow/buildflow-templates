@@ -1,7 +1,7 @@
 """This file contains all of the primitives needed by our flow."""
 
 
-from buildflow.io.gcp import CloudSQLDatabase, CloudSQLInstance
+from buildflow.io.gcp import CloudSQLDatabase, CloudSQLInstance, CloudSQLUser
 from buildflow.types.gcp import CloudSQLDatabaseVersion, CloudSQLInstanceSettings
 
 from journal_entry_saas.settings import env
@@ -21,4 +21,10 @@ cloud_sql_instance = CloudSQLInstance(
 cloud_sql_database = CloudSQLDatabase(
     instance=cloud_sql_instance,
     database_name="launchflow-gcp-postgres-auth-cloud-db",
+)
+
+cloud_sql_user = CloudSQLUser(
+    instance=cloud_sql_instance,
+    user_name=env.database_user,
+    password=env.database_password,
 )

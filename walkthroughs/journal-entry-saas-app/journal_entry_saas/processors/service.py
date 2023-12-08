@@ -31,4 +31,4 @@ def index(storage_user_dep: MaybeStorageUserDep):
     if storage_user_dep.user is None:
         # If the user was not authed redirect to the login page.
         return RedirectResponse("/auth/login")
-    return FileResponse("gcp_postgres_auth/processors/index.html")
+    return FileResponse("journal_entry_saas/processors/index.html")
