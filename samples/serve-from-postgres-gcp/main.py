@@ -4,7 +4,7 @@ import os
 import aiohttp.client_exceptions
 from buildflow import Flow
 from buildflow.dependencies.sqlalchemy import SessionDepBuilder, engine
-from buildflow.io.gcp import CloudSQLDatabase, CloudSQLInstance
+from buildflow.io.gcp import CloudSQLDatabase, CloudSQLInstance, CloudSQLUser
 from buildflow.types.gcp import CloudSQLDatabaseVersion, CloudSQLInstanceSettings
 from serve_from_postgres import api_schemas, models
 
@@ -24,7 +24,13 @@ cloud_sql_database = CloudSQLDatabase(
     database_name="launchflow-serve-from-postgres-db",
 )
 
-app.manage(cloud_sql_instance, cloud_sql_database)
+cloud_sql_user = CloudSQLUser(
+    instance=cloud_sql_instance,
+    user_name="my-user",
+    password="my-password",
+)
+
+app.manage(cloud_sql_instance, cloud_sql_database, cloud_sql_user)
 
 DB = SessionDepBuilder(
     db_primitive=cloud_sql_database,
