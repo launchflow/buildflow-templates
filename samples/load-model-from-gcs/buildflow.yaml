@@ -1,8 +1,8 @@
-app: serve-from-postgres
+app: load-model
 pulumi_config:
     stacks:
-    -   name: local
-        backend_url: file://./.buildflow/_pulumi/local
+        - name: local
+          backend_url: file://./.buildflow/_pulumi/local
     pulumi_home: ./.buildflow/_pulumi
     default_stack: local
 entry_point: main:app
