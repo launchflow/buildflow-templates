@@ -2,71 +2,71 @@
 
 walkthroughs:
   - name: Collect Wearable Device Data
-    description: "Description here"
+    description: "TODO"
     tags: ["Postgres"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "collect-wearable-device-data"
 
   - name: Journal Entry SaaS App
-    description: "Description here"
-    tags: ["Postgres"]
+    description: "A simple application that allows users to log in with their Google Account and create, read, update, and delete (CRUD) journal entries that are stored in a postgres database hosted on Google Cloud SQL"
+    tags: ["Postgres", "Auth"]
     cloud_providers: ["GCP"]
-    code_preview_path: "main.py"
+    code_preview_path: "journal_entry_saas/processors/journals.py"
     directory: "journal-entry-saas-app"
 
-  - name: Llama ChatGPT
-    description: "Description here"
-    tags: ["AI"]
+  - name: Llama 2 Chat Bot
+    description: "Create a chatbot using the Llama 2 model hosted on Google Cloud Storage or AWS S3 Storage."
+    tags: ["GCS", "S3", "AI"]
     cloud_providers: ["GCP", "AWS"]
-    code_preview_path: "main.py"
-    directory: "llama-chatgpt"
+    code_preview_path: "llama2_chat_bot/processors/service.py"
+    directory: "llama2-chat-bot"
 
   - name: Realtime Image Classification (AWS)
-    description: "Description here"
-    tags: ["AI", "S3"]
-    cloud_providers: ["AWS"]
-    code_preview_path: "main.py"
+    description: "Process images in realtime as they're uploaded to a S3 bucket. Results are stored in MotherDuck."
+    tags: ["AI", "S3", "duckdb"]
+    cloud_providers: ["AWS", "MOTHERDUCK"]
+    code_preview_path: "image_classification/processors/consumer.py"
     directory: "realtime-image-classification-aws"
 
   - name: Realtime Image Classification (GCP)
-    description: "Description here"
-    tags: ["AI", "GCS"]
+    description: "Process images in realtime as they're uploaded to a GCS bucket. Results are stored in BigQuery."
+    tags: ["AI", "GCS", "BigQuery"]
     cloud_providers: ["GCP"]
-    code_preview_path: "main.py"
+    code_preview_path: "image_classification/processors/consumer.py"
     directory: "realtime-image-classification-gcp"
 
   - name: Realtime Image Classification (Local)
-    description: "Description here"
-    tags: ["AI"]
+    description: "Process images in realtime as they're uploaded to a local directory. Results are stored in a local duckdb instance."
+    tags: ["AI", "duckdb"]
     cloud_providers: []
-    code_preview_path: "main.py"
+    code_preview_path: "image_classification/processors/consumer.py"
     directory: "realtime-image-classification-local"
 
 starter_templates:
   - name: BuildFlow Collector
-    description: "Description here"
+    description: "Starting point for using BuildFlow Collectors to ingest data over HTTP, transform, and write data to a datastore."
     tags: []
     cloud_providers: []
-    code_preview_path: "main.py"
+    code_preview_path: "buildflow_collector/processors/collector.py"
     directory: "buildflow-collector"
 
   - name: BuildFlow Consumer
-    description: "Description here"
+    description: "Starting point for using BuildFlow Consumers to process data async using the queue provider of your choice."
     tags: []
     cloud_providers: []
-    code_preview_path: "main.py"
+    code_preview_path: "buildflow_consumer/processors/consumer.py"
     directory: "buildflow-consumer"
 
   - name: BuildFlow Service
-    description: "Description here"
+    description: "Starting point for using BuildFlow Services to serve data over HTTP or Websockets."
     tags: []
     cloud_providers: []
-    code_preview_path: "main.py"
+    code_preview_path: "buildflow_service/service.py"
     directory: "buildflow-service"
 
   - name: SaaS Starter with Auth
-    description: "Description here"
+    description: "TODO"
     tags: ["Postgres", "Auth"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
@@ -74,127 +74,134 @@ starter_templates:
 
 samples:
   - name: Dead Letter Queue PubSub
-    description: "Description here"
+    description: "Push failed HTTP requests to a dead letter queue to reliably handle edge cases at runtime." 
     tags: ["PubSub"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "dead-letter-queue-pubsub"
 
   - name: Dead Letter Queue SQS
-    description: "Description here"
+    description: "Push failed HTTP requests to a dead letter queue to reliably handle edge cases at runtime." 
     tags: ["SQS"]
     cloud_providers: ["AWS"]
     code_preview_path: "main.py"
     directory: "dead-letter-queue-sqs"
 
   - name: Discord Bot
-    description: "Description here"
+    description: "TODO"
     tags: []
     cloud_providers: []
     code_preview_path: "main.py"
     directory: "discord-bot"
 
   - name: Google Auth
-    description: "Description here"
+    description: "Create a service that restricts access using Google Account credentials."
     tags: ["Auth"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "google-auth"
 
   - name: Load Model from Google Cloud Storage
-    description: "Description here"
+    description: "Loads a Llama 2 model from a GCS bucket."
     tags: ["AI", "GCS"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "load-model-from-gcs"
 
   - name: Load Model from S3 Bucket
-    description: "Description here"
+    description: "Loads a Llama 2 model from a S3 bucket."
     tags: ["AI", "S3"]
     cloud_providers: ["AWS"]
     code_preview_path: "main.py"
     directory: "load-model-from-s3"
 
   - name: Long Running Workflows with SQS
-    description: "Description here"
+    description: "TODO"
     tags: ["SQS"]
     cloud_providers: ["AWS"]
     code_preview_path: "main.py"
     directory: "long-running-workflows-aws"
 
   - name: Long Running Workflows with PubSub
-    description: "Description here"
+    description: "TODO"
     tags: ["PubSub"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "long-running-workflows-gcp"
 
   - name: Schedule Background Tasks with SQS
-    description: "Description here"
+    description: "TODO"
     tags: ["SQS"]
     cloud_providers: ["AWS"]
     code_preview_path: "main.py"
     directory: "schedule-background-tasks-aws"
 
   - name: Schedule Background Tasks with PubSub
-    description: "Description here"
+    description: "TODO"
     tags: ["PubSub"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "schedule-background-tasks-gcp"
 
   - name: Serve from Postgres
-    description: "Description here"
+    description: "Create a service that serves data stored in Postgres."
     tags: ["Postgres"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "serve-from-postgres-gcp"
 
   - name: Serve from S3 Storage Bucket
-    description: "Description here"
+    description: "Create a service that serves data stored in a S3 Bucket."
     tags: ["S3"]
     cloud_providers: ["AWS"]
     code_preview_path: "main.py"
     directory: "serve-from-storage-bucket-aws"
 
   - name: Serve from GCS Storage Bucket
-    description: "Description here"
+    description: "Create a service that serves data stored in a GCS Bucket."
     tags: ["GCS"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "serve-from-storage-bucket-gcp"
 
   - name: Slack Bot
-    description: "Description here"
+    description: "TODO"
     tags: []
     cloud_providers: []
     code_preview_path: "main.py"
     directory: "slack-bot"
 
   - name: Stream data over WebSockets
-    description: "Description here"
+    description: "TODO"
     tags: ["Websockets"]
     cloud_providers: []
     code_preview_path: "main.py"
     directory: "stream-data-over-websockets"
 
   - name: Stripe Webhooks
-    description: "Description here"
+    description: "TODO"
     tags: ["Webhooks"]
     cloud_providers: []
     code_preview_path: "main.py"
     directory: "stripe-webhooks"
 
   - name: Sync Postgres to BigQuery
-    description: "Description here"
+    description: "TODO"
     tags: ["Postgres", "BigQuery"]
     cloud_providers: ["GCP"]
     code_preview_path: "main.py"
     directory: "sync-postgres-to-bigquery"
 
   - name: Sync Postgres to Snowflake
-    description: "Description here"
+    description: "TODO"
     tags: ["Postgres"]
     cloud_providers: ["Snowflake"]
     code_preview_path: "main.py"
     directory: "sync-postgres-to-snowflake"
+
+  - name: Zapier without the price tag
+    description: "TODO"
+    tags: []
+    cloud_providers: []
+    code_preview_path: "main.py"
+    directory: "slack-bot"

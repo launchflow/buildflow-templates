@@ -45,7 +45,7 @@ class Template:
 
     @property
     def cwd(self) -> str:
-        return os.path.join("starter-templates", self.directory)
+        raise NotImplementedError
 
 
 @dataclass
@@ -127,7 +127,7 @@ def load_yaml(file_path: str) -> BuildFlowTemplates:
 def upload_template_to_fastapi(
     upload_url: str, github_base_url: str, template: Template
 ):
-    github_url = f"{github_base_url}/{template.directory}"
+    github_url = f"{github_base_url}/{template.cwd}"
     data = {
         "display_name": template.name,
         "description": template.description,
@@ -172,9 +172,8 @@ def build_template(template: Template):
 
 
 upload_url = "http://localhost:3003/templates/upload"
-github_base_url = (
-    "https://github.com/launchflow/buildflow-templates/tree/main/starter-templates"
-)
+drop_all_templates_url = "http://localhost:3003/templates/drop"
+github_base_url = "https://github.com/launchflow/buildflow-templates/tree/main"
 
 all_templates_file_path = "templates.yaml"
 buildflow_templates = load_yaml(all_templates_file_path)
@@ -206,8 +205,16 @@ print(f"num_failure: {num_failure}")
 for name in successful:
     print(name)
 
-# for template in buildflow_templates.iter_templates():
-#     response = upload_template_to_fastapi(upload_url, github_base_url, template)
-#     if response.status_code != 200:
-#         print(f'Error uploading template: {template.name}')
-#         print(response.text)
+
+# Clear all templates in the database
+response = requests.delete(drop_all_templates_url)
+print("DELETE:", response.text)
+
+# Upload all templates to the database
+for template in buildflow_templates.iter_templates():
+    if template.name not in successful:
+        continue
+    response = upload_template_to_fastapi(upload_url, github_base_url, template)
+    if response.status_code != 200:
+        print(f"Error uploading template: {template.name}")
+        print(response.text)
