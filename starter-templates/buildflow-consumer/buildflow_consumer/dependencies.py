@@ -1,6 +1,6 @@
 """This file can contain all of the dependencies needed by your flow.
 
-For example if you needed a authenticated google user: https://docs.buildflow.dev/dependencies/auth
+For example if you needed a authenticated google user: https://docs.launchflow.com/buildflow/dependencies/auth
 
     from buildflow.dependencies.auth import AuthenticatedGoogleUserDepBuilder
 

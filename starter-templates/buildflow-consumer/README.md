@@ -2,27 +2,27 @@
 
 Welcome to BuildFlow!
 
-This is a simple example of [consumer](https://docs.buildflow.dev/programming-guide/consumers) that takes in a JSON object containing and integer and returns a JSON object containing the integer divided by 2.
+This is a simple example of [consumer](https://docs.launchflow.com/buildflow/programming-guide/consumers) that takes in a JSON object containing and integer and returns a JSON object containing the integer divided by 2.
 
 ## Running the Template
 
-To get started you will first need to define a [primitive](https://docs.buildflow.dev/programming-guide/primitives) source and a sink in [primitives.py](buildflow_consumer/primitives.py). Some examples could be:
+To get started you will first need to define a [primitive](https://docs.launchflow.com/buildflow/programming-guide/primitives) source and a sink in [primitives.py](buildflow_consumer/primitives.py). Some examples could be:
 
 **Sinks**
 
-- [GCP Pub/Sub Subscription](https://docs.buildflow.dev/primitives/gcp/pubsub#gcp-pub-sub-subscription)
-- [GCS File Change Stream](https://docs.buildflow.dev/primitives/gcp/gcs_file_change_stream)
-- [AWS SQS](https://docs.buildflow.dev/primitives/aws/sqs)
-- [S3 File Change Stream](https://docs.buildflow.dev/primitives/gcp/gcs_file_change_stream)
+- [GCP Pub/Sub Subscription](https://docs.launchflow.com/buildflow/primitives/gcp/pubsub#gcp-pub-sub-subscription)
+- [GCS File Change Stream](https://docs.launchflow.com/buildflow/primitives/gcp/gcs_file_change_stream)
+- [AWS SQS](https://docs.launchflow.com/buildflow/primitives/aws/sqs)
+- [S3 File Change Stream](https://docs.launchflow.com/buildflow/primitives/gcp/gcs_file_change_stream)
 
 **Sources**
 
-- [GCP BigQuery Table](https://docs.buildflow.dev/primitives/gcp/bigquery#bigquerytable)
-- [GCP Pub/Sub Topic](https://docs.buildflow.dev/primitives/gcp/pubsub#gcp-pub-sub-topic)
-- [AWS SQS](https://docs.buildflow.dev/primitives/aws/sqs)
-- [DuckDB Table](https://docs.buildflow.dev/primitives/duckdb)
+- [GCP BigQuery Table](https://docs.launchflow.com/buildflow/primitives/gcp/bigquery#bigquerytable)
+- [GCP Pub/Sub Topic](https://docs.launchflow.com/buildflow/primitives/gcp/pubsub#gcp-pub-sub-topic)
+- [AWS SQS](https://docs.launchflow.com/buildflow/primitives/aws/sqs)
+- [DuckDB Table](https://docs.launchflow.com/buildflow/primitives/duckdb)
 
-For a full list of primitives see: https://docs.buildflow.dev/primitives
+For a full list of primitives see: https://docs.launchflow.com/buildflow/primitives
 
 ### Create Infrastructure
 
@@ -72,9 +72,9 @@ Below the root level we have:
 
 This is the directory where your project code lives. You can put any files you want in here and they will be available to your project. We create a couple directories and files for you:
 
-- **processors**: This is where you can put any custom processors you want to use in your project. In here you will see we have defined a _consumer.py_ to define our [consumer](https://docs.buildflow.dev/programming-guide/consumers).
-- **primitives.py**: This is where you can define any custom [primitive](https://docs.buildflow.dev/primitives) resources that your project will need. Note it is empty right now since your initial project is so simple.
-- **dependencies.py**: This is where you can define any custom [dependencies](https://docs.buildflow.dev/programming-guide/dependencies) you might need.
+- **processors**: This is where you can put any custom processors you want to use in your project. In here you will see we have defined a _consumer.py_ to define our [consumer](https://docs.launchflow.com/buildflow/programming-guide/consumers).
+- **primitives.py**: This is where you can define any custom [primitive](https://docs.launchflow.com/buildflow/primitives) resources that your project will need. Note it is empty right now since your initial project is so simple.
+- **dependencies.py**: This is where you can define any custom [dependencies](https://docs.launchflow.com/buildflow/programming-guide/dependencies) you might need.
 - **schemas.py**: This file contains our dataclass schemas for requests and responses from our endpoints.
 - **settings.py**: This file loads in our environment variables and makes them available to our project.
 
@@ -86,7 +86,7 @@ This is a hidden directory that contains all the build artifacts for your projec
 
 You project is pretty simple now but you can customize it to do anything you want. Here are some ideas:
 
-- Attach [primitives](https://docs.buildflow.dev/programming-guide/primitives) to your project to add resources like [databases](https://docs.buildflow.dev/primitives/gcp/cloud_sql), [queues](https://docs.buildflow.dev/primitives/aws/sqs), [buckets](https://docs.buildflow.dev/primitives/aws/s3), or [data warehouses](https://docs.buildflow.dev/primitives/gcp/bigquery)
-- Use [depedencies](https://docs.buildflow.dev/programming-guide/dependencies) to attach dependencies to your processors. Such as [google auth](https://docs.buildflow.dev/dependencies/auth#authenticated-google-user), [SQLAlchemy Session](https://docs.buildflow.dev/dependencies/sqlalchemy), or push data to a [sink](https://docs.buildflow.dev/dependencies/sink)
-- Add additional processors for [serving APIs](https://docs.buildflow.dev/programming-guide/endpoints) or [data ingestion](https://docs.buildflow.dev/programming-guide/collectors)
-- Manage your entire stack with [BuildFlow's pulumi integration](https://docs.buildflow.dev/programming-guide/buildflow-yaml#pulumi-configure)
+- Attach [primitives](https://docs.launchflow.com/buildflow/programming-guide/primitives) to your project to add resources like [databases](https://docs.launchflow.com/buildflow/primitives/gcp/cloud_sql), [queues](https://docs.launchflow.com/buildflow/primitives/aws/sqs), [buckets](https://docs.launchflow.com/buildflow/primitives/aws/s3), or [data warehouses](https://docs.launchflow.com/buildflow/primitives/gcp/bigquery)
+- Use [depedencies](https://docs.launchflow.com/buildflow/programming-guide/dependencies) to attach dependencies to your processors. Such as [google auth](https://docs.launchflow.com/buildflow/dependencies/auth#authenticated-google-user), [SQLAlchemy Session](https://docs.launchflow.com/buildflow/dependencies/sqlalchemy), or push data to a [sink](https://docs.launchflow.com/buildflow/dependencies/sink)
+- Add additional processors for [serving APIs](https://docs.launchflow.com/buildflow/programming-guide/endpoints) or [data ingestion](https://docs.launchflow.com/buildflow/programming-guide/collectors)
+- Manage your entire stack with [BuildFlow's pulumi integration](https://docs.launchflow.com/buildflow/programming-guide/buildflow-yaml#pulumi-configure)

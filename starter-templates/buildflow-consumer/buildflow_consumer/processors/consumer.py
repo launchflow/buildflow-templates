@@ -1,9 +1,10 @@
 """Define our consumer processor.
 
-For more information on consumers see: https://docs.buildflow.dev/programming-guide/consumers
+For more information on consumers see: https://docs.launchflow.com/buildflow/programming-guide/consumers
 """
 
 from buildflow import consumer
+
 from buildflow_consumer.primitives import sink, source
 from buildflow_consumer.schemas import InputSchema, OutputSchema
 

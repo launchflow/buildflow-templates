@@ -1,9 +1,10 @@
 """Define our collector processor.
 
-For more information on collectors see: https://docs.buildflow.dev/programming-guide/collectors
+For more information on collectors see: https://docs.launchflow.com/buildflow/programming-guide/collectors
 """
 
 from buildflow import collector
+
 from buildflow_collector.primitives import sink
 from buildflow_collector.schemas import InputSchema, OutputSchema
 

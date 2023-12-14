@@ -25,6 +25,10 @@ os.environ["REDIRECT_URI"] = "http://localhost:3000"
 os.environ["CLIENT_SECRET"] = "123"
 os.environ["JAVASCRIPT_ORIGINS"] = "http://localhost:3000"
 os.environ["CREATE_MODELS"] = "false"
+os.environ["MODEL_BUCKET"] = "launchflow"
+os.environ["MODEL_PATH"] = "models"
+os.environ["MAX_CONTEXT_SIZE"] = "1024"
+os.environ["CPUS_PER_REPLICA"] = "2"
 
 
 successful = []

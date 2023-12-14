@@ -1,6 +1,6 @@
 """Here we define the flow which is our main entry point of our project.
 
-For more information see: https://docs.buildflow.dev/programming-guide/flows
+For more information see: https://docs.launchflow.com/buildflow/programming-guide/flows
 """
 from buildflow import Flow, FlowOptions
 from buildflow_consumer.primitives import sink, source
